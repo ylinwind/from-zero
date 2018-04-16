@@ -10,9 +10,10 @@ module.exports = {
     devtool:'source-map',
     entry: "./src/index.js",
     output: {
-        path: __dirname + "/dist",
-        filename: "js/"+"bundle-index.js"
+        path: __dirname + "/build",
+        filename: "js/"+"bundle-index.js",
         // filename: "js/"+"[name].[hash].js" //production环境时使用
+        publicPath:'../../',
     },
     resolve: {
         extensions: ['.js' , '.jsx' , '.json']
@@ -20,9 +21,18 @@ module.exports = {
     module: {
         rules: [
             { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader',query:{presets:['es2015','stage-0','react']}},
-            { test: /\.(less|css)?$/,loader: ["style-loader", "css-loader", "less-loader"]},//, "postcss-loader"
-            { test: /\.jpe?g$|\.gif$|\.eot$|\.png$|\.svg$|\.woff$|\.woff2$|\.ttf$/, loader: "file" },
+            { test: /\.(less|css)?$/,loader: ExtractTextPlugin.extract('style-loader','css-loader','less-loader',{
+                publicPath:'../' 
+            })
+            },//, "postcss-loader"
+            // { test: /\.(less|css)?$/,loader: '["style-loader", "css-loader", "less-loader"]'},//, "postcss-loader"
+            // { test: /\.jpe?g$|\.gif$|\.eot$|\.png$|\.svg$|\.woff$|\.woff2$|\.ttf$/, loader: "file" },
+            // {test: /\.(png|jpg|jpeg|gif|woff)$/, loader: 'url-loader?limit=4192&name=[path][name].[ext]' },
+            { test: /\.jpe?g$|\.gif$|\.jpg$|\.eot$|\.png$|\.svg$|\.woff$|\.woff2$|\.ttf$/, loader: "url-loader?limit=8192&name=imgs/[hash:8].[name].[ext]"},
         ]
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     // externals: {
     //     "react": "React",
@@ -40,9 +50,14 @@ module.exports = {
         // new webpack.optimize.CommonsChunkPlugin({
         //     names:['vendor','manifest']
         // }),
+        // new ExtractTextPlugin({  
+        //     use: loaders,  
+        //     fallback: 'style-loader',  
+        //     publicPath:'../../'            //添加此代码！！！  
+        //   }) ,
         new CopyWebpackPlugin([
-            { from: "node_modules/react/cjs/react.production.min.js", to: "js/react.min.js" },
-            { from: "node_modules/react-dom/cjs/react-dom.production.min.js", to: "js/react-dom.min.js" },
+            // { from: "node_modules/react/cjs/react.production.min.js", to: "js/react.min.js" },
+            // { from: "node_modules/react-dom/cjs/react-dom.production.min.js", to: "js/react-dom.min.js" },
             { from: "index.html", to: "index.html" },
             { from: "src/favicon.ico", to: "favicon.ico" }
         ]),
@@ -57,59 +72,37 @@ module.exports = {
             }
         })*/
     ],
-    optimization: {
-        /*splitChunks: {
-            chunks: "initial", // 必须三选一： "initial" | "all"(默认就是all) | "async" 
-            minSize: 0, // 最小尺寸，默认0
-            minChunks: 1, // 最小 chunk ，默认1
-            maxAsyncRequests: 1, // 最大异步请求数， 默认1
-            maxInitialRequests : 1, // 最大初始化请求书，默认1
-            name: function(){}, // 名称，此选项可接收 function
-            cacheGroups:{ // 这里开始设置缓存的 chunks
-                priority: 10, // 缓存组优先级
-                vendor: { // key 为entry中定义的 入口名称
-                    chunks: "initial", // 必须三选一： "initial" | "all" | "async"(默认就是异步) 
-                    test: /react|lodash/, // 正则规则验证，如果符合就提取 chunk
-                    name: "vendor", // 要缓存的 分隔出来的 chunk 名称 
-                    minSize: 0,
-                    minChunks: 1,
-                    enforce: true,
-                    maxAsyncRequests: 1, // 最大异步请求数， 默认1
-                    maxInitialRequests : 1, // 最大初始化请求书，默认1
-                    reuseExistingChunk: true // 可设置是否重用该chunk（查看源码没有发现默认值）
-                }
-            }
-        }*/
-        splitChunks: {
+    // optimization: {
+    //     splitChunks: {
 
-            cacheGroups: {
+    //         cacheGroups: {
       
-              commons: {
+    //           commons: {
       
-                chunks: 'initial',
+    //             chunks: 'initial',
       
-                minChunks: 2, maxInitialRequests: 5,
+    //             minChunks: 2, maxInitialRequests: 5,
       
-                minSize: 0
+    //             minSize: 0
       
-              },
+    //           },
       
-              vendor: {
+    //           vendor: {
       
-                test: /node_modules/,
+    //             test: /node_modules/,
       
-                chunks: 'initial',
+    //             chunks: 'initial',
       
-                name: 'vendor',
+    //             name: 'vendor',
       
-                priority: 10,
+    //             priority: 10,
       
-                enforce: true
+    //             enforce: true
       
-              }
+    //           }
       
-            }
+    //         }
       
-          },
-    }
+    //       },
+    // }
 };

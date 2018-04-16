@@ -1,4 +1,5 @@
 import React from 'react';
+import { dirname } from 'path';
 
 class Hello extends React.Component{
     constructor(){
@@ -6,7 +7,6 @@ class Hello extends React.Component{
         this.state={}
     }
     render(){
-        console.log('inin')
         return(
             <div>
                 <p className="title">Hello World!</p>
