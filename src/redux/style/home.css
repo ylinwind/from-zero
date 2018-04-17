@@ -1,11 +1,12 @@
+
 .home-bg{
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background: #b97e7e;
-}
+    /* background: #b97e7e; */
+}/*
 .home-nav-list{
     position: absolute;
     left: 50%;
@@ -14,5 +15,6 @@
     background: #e07f7f;
 }
 .home-bg-img{
-    background: url('./src/imgs/banner_1.jpg');
+    background: url('../../imgs/banner_1.jpg');
 };
+*/

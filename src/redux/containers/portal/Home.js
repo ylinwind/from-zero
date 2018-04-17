@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Banner from '../../components/ant-motion/Banner';
+import BannerComs from '../../components/Banner';
+
+import {AntBanner,LxBanner} from 'LxComs';
 
 class Home extends React.Component{
     constructor(){
@@ -8,9 +11,15 @@ class Home extends React.Component{
         this.state={}
     }
     render(){
+        let banners = [
+            {src:'./src/imgs/banner_1.jpg',text:'1'},
+            {src:'./src/imgs/banner_2.jpg',text:'2'},
+            {src:'./src/imgs/banner_3.jpg',text:'3'},
+            {src:'./src/imgs/banner_4.jpg',text:'4'}
+        ]
         return(
-            <div className="home-bg">12
-                <ul className="home-nav-list" >
+            <div className="home-bg">
+                {/*<ul className="home-nav-list" >
                     <li>
                     <Link to="/">Home</Link>
                     </li>
@@ -22,11 +31,16 @@ class Home extends React.Component{
                     </li>
                 </ul>
                 <div>
-                    {/* <Banner/> */}
+                    <Banner/> 
                     <div className="home-bg-img">
+                    1
                     </div>
-                    {/* <img src='./src/imgs/banner_1.jpg'/> */}
-                </div>
+                    <img src='./src/imgs/banner_1.jpg'/>
+                </div>*/}
+                    
+                <LxBanner
+                    datas={banners}
+                />
             </div>
         )
     }

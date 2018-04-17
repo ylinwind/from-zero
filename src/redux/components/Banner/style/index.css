@@ -1,0 +1,46 @@
+.lx-coms-banner{
+    height: 100%;
+}
+.lx-coms-banner-ul{
+    position: relative;
+    height: 100%;
+}
+.lx-coms-banner-item{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+/*  */
+@keyframes bannerAnimation_fade
+{
+    from {opacity: 1;}
+    to {opacity:0;}
+}
+
+@-moz-keyframes bannerAnimation_fade /* Firefox */
+{
+    from {opacity: 1;}
+    to {opacity:0;}
+}
+
+@-webkit-keyframes bannerAnimation_fade /* Safari 和 Chrome */
+{
+    from {opacity: 1;}
+    to {opacity:0;}
+}
+
+@-o-keyframes bannerAnimation_fade /* Opera */
+{
+    from {opacity: 1;}
+    to {opacity:0;}
+}
+
+@keyframes bannerAnimation_translate
+{
+    from {opacity: 1;}
+    to {opacity:0;}
+}
